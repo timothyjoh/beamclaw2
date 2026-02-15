@@ -16,3 +16,6 @@ config :phoenix, :plug_init_mode, :runtime
 # Sort query params output of verified routes for robust url comparisons
 config :phoenix,
   sort_verified_routes_query_params: true
+
+# Use mock HTTP client for LLM tests
+config :beamclaw2, :anthropic_api_key, "test-api-key"

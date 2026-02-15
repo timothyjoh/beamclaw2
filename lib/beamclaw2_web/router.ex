@@ -9,6 +9,9 @@ defmodule Beamclaw2Web.Router do
     pipe_through :api
 
     resources "/agents", AgentController, except: [:new, :edit]
+
+    post "/chat/completions", ChatController, :create
+    post "/chat/completions/stream", ChatController, :stream
   end
 
   get "/health", Beamclaw2Web.HealthController, :index

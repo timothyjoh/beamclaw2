@@ -17,6 +17,11 @@ import Config
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 # BeamClaw2 runtime config from environment variables
+# LLM provider configuration
+if api_key = System.get_env("ANTHROPIC_API_KEY") do
+  config :beamclaw2, :anthropic_api_key, api_key
+end
+
 if log_level = System.get_env("BEAMCLAW_LOG_LEVEL") do
   config :logger, level: String.to_existing_atom(log_level)
 end
