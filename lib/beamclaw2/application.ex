@@ -14,6 +14,8 @@ defmodule Beamclaw2.Application do
       Beamclaw2Web.Telemetry,
       {DNSCluster, query: Application.get_env(:beamclaw2, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Beamclaw2.PubSub},
+      {Registry, keys: :unique, name: Beamclaw2.AgentRegistry},
+      Beamclaw2.AgentSupervisor,
       Beamclaw2Web.Endpoint
     ]
 
