@@ -7,6 +7,8 @@ defmodule Beamclaw2Web.Router do
 
   scope "/api", Beamclaw2Web do
     pipe_through :api
+
+    resources "/agents", AgentController, except: [:new, :edit]
   end
 
   get "/health", Beamclaw2Web.HealthController, :index

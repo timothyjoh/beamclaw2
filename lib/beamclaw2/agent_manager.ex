@@ -47,11 +47,17 @@ defmodule Beamclaw2.AgentManager do
     AgentServer.update_status(agent_id, new_status)
   end
 
-  @doc "Stop an agent gracefully."
+  @doc "Stop an agent gracefully. Transitions to :stopped before termination."
   @spec stop_agent(String.t()) :: :ok | {:error, :not_found}
   def stop_agent(agent_id) do
     case Registry.lookup(Beamclaw2.AgentRegistry, agent_id) do
       [{pid, _}] ->
+        try do
+          GenServer.call(pid, {:update_status, :stopped})
+        catch
+          :exit, _ -> :ok
+        end
+
         AgentSupervisor.stop_agent(pid)
 
       [] ->
